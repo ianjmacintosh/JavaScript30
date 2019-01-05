@@ -59,6 +59,51 @@
 
 <script>
 
+  // Add event listener for keyboard input... it'll be a key code I guess
+
+  document.addEventListener("keydown", ({key} = keystrokeEvent) => {
+    let validChars = [
+        "a",
+        "s",
+        "d",
+        "f",
+        "g",
+        "h",
+        "j",
+        "k",
+        "l"
+      ];
+    
+    if ((key.length === 1) && (validChars.indexOf(key) !== -1)) {
+      playDrum(key.toUpperCase().charCodeAt(0))
+    }
+  })
+  
+  // Function:
+  // * Find audio element associated with key
+  // * Add `playing` class to element
+  // * Play dat audio element
+  // * Once audio element finishes playing, remove the `playing` class from associated element
+
+  function playDrum(keyCode) {
+    let keyElement = document.querySelector(`.key[data-key='${keyCode}']`);
+    let audioElement = document.querySelector(`audio[data-key='${keyCode}']`);
+    
+    keyElement.classList.add("playing");
+    audioElement.currentTime = 0;
+    audioElement.play();
+  }
+
+  const keyElements = document.querySelectorAll(".key");
+
+  keyElements.forEach((keyElement) => {
+    keyElement.addEventListener("transitionend", (event) => {
+      if (event.propertyName === "transform") {
+        event.target.classList.remove("playing");
+      }
+    })
+  })
+
 </script>
 
 
