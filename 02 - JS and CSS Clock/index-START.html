@@ -63,12 +63,13 @@
       position: absolute;
       top: 50%;
       transform-origin: right;
+      transform: rotate(90deg);
+      transition: transform 100ms;
     }
 
   </style>
 
   <script>
-
     function updateHand(amount, interval) {
       const element = document.querySelector(`.hand.${interval}-hand`);
       if (element === null) { return; }
@@ -79,10 +80,28 @@
       }
       const slices = sliceMap[interval];
       const getDegreeRotation = (amount, slices) => ((360/slices)*amount) + 90;
+      if (interval === "second") {
+        element.style.transition = "";
+        console.log(`Transition on ${interval} hand: ${element.style.transition}`);
+        console.log(element.style.transition);
+      }
       element.style.transform = `rotate(${getDegreeRotation(amount, slices)}deg)`;
     }
 
+    function setClock(time) {
+      const hour = time.getHours() > 12 ? time.getHours() - 12 : time.getHours();
+      const min = time.getMinutes();
+      const second = time.getSeconds();
 
+      updateHand(hour, "hour");
+      updateHand(min, "min");
+      updateHand(second, "second");
+    }
+
+    setInterval(() => {
+      const currentTime = new Date();
+      setClock(currentTime);
+    }, 1000);
   </script>
 </body>
 </html>
