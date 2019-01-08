@@ -82,8 +82,6 @@
       const getDegreeRotation = (amount, slices) => ((360/slices)*amount) + 90;
       if (interval === "second") {
         element.style.transition = "";
-        console.log(`Transition on ${interval} hand: ${element.style.transition}`);
-        console.log(element.style.transition);
       }
       element.style.transform = `rotate(${getDegreeRotation(amount, slices)}deg)`;
     }
