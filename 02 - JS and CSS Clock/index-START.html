@@ -53,7 +53,7 @@
       position: relative;
       width: 100%;
       height: 100%;
-      transform: translateY(-3px); /* account for the height of the clock hands */
+      transform: translateY(-3px) rotate(90deg); /* account for the height of the clock hands */
     }
 
     .hand {
@@ -64,9 +64,7 @@
       top: 50%;
       transform-origin: right;
       transform: rotate(90deg);
-      transition: transform 100ms;
     }
-
   </style>
 
   <script>
@@ -79,11 +77,9 @@
         "hour": 12
       }
       const slices = sliceMap[interval];
-      const getDegreeRotation = (amount, slices) => ((360/slices)*amount) + 90;
-      if (interval === "second") {
-        element.style.transition = "";
-      }
-      element.style.transform = `rotate(${getDegreeRotation(amount, slices)}deg)`;
+      const getDegreeRotation = (amount, slices) => (( 360 / slices ) * amount);
+      const thisDegreeRotation = getDegreeRotation(amount, slices);
+      element.style.transform = `rotate(${thisDegreeRotation}deg)`;
     }
 
     function setClock(time) {
