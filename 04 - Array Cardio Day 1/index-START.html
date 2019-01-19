@@ -68,8 +68,11 @@
     // Get the anchors
     const streetAnchors = document.querySelectorAll(".mw-category a");
 
+    // Make an array of street names from the array of anchors
+    const streetNames = Array.prototype.map.call(streetAnchors, (anchor) => anchor.text);
+
     // Filter the anchors using a function that determines if "de" is in the name
-    const bestStreetNames = Array.prototype.filter((anchor) => anchor.text.indexOf("de") !== -1);
+    const bestStreetNames = streetNames.filter((anchor) => anchor.indexOf("de") !== -1);
 
     // Return the anchors
     console.table(bestStreetNames);
