@@ -66,8 +66,13 @@
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
     
     // Get the anchors
+    const streetAnchors = document.querySelectorAll(".mw-category a");
+
     // Filter the anchors using a function that determines if "de" is in the name
+    const bestStreetNames = Array.prototype.filter((anchor) => anchor.text.indexOf("de") !== -1);
+
     // Return the anchors
+    console.table(bestStreetNames);
 
 
     // 7. sort Exercise
