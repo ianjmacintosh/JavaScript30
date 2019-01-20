@@ -84,7 +84,7 @@
     // Sort the people alphabetically by last name
     console.log("Sort the people alphabetically by last name");
     console.table(
-      inventors.sort((thisInventor, lastInventor) => thisInventor.last.charAt(0).toLocaleUpperCase() > lastInventor.last.charAt(0).toLocaleUpperCase() ? 1 : -1)
+      people.sort((thisPerson, lastPerson) => thisPerson.charAt(0).toLocaleUpperCase() > lastPerson.charAt(0).toLocaleUpperCase() ? 1 : -1)
     );
 
     // 8. Reduce Exercise
