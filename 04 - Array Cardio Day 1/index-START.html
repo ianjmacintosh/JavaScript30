@@ -91,6 +91,22 @@
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
 
+    // The hint here is that you should use reduce... and I think I'm finna use the accumulator variable to carry urrythang
+
+    // Begin with an empty accumulator object and iterate over each member of an array
+    const instancesOfEach = data.reduce((accumulator, currentValue) => {
+    // If the accumulator has a property with the name of the current member, increment the value of that property
+      if (accumulator[currentValue]) {
+        accumulator[currentValue] += 1;
+    // If the accumulator does not have a property with the name of the current member, add one with a value of 1
+      } else {
+        accumulator[currentValue] = 1;
+      }
+      return accumulator;
+    }, {});
+
+    console.table(instancesOfEach);
+
   </script>
 </body>
 </html>
