@@ -64,15 +64,17 @@
 
     // 6. create a list of Boulevards in Paris that contain 'de' anywhere in the name
     // https://en.wikipedia.org/wiki/Category:Boulevards_in_Paris
+
+    // TODO: Use some HTTP get method or whatever to make this send a request out to get the asset!
     
     // Get the anchors
-    const streetAnchors = Array.from(document.querySelectorAll(".mw-category a"));
+    var streetAnchors = Array.from(document.querySelectorAll(".mw-category a"));
 
     // Make an array of street names from the array of anchors
-    const streetNames = streetAnchors.map((anchor) => anchor.text);
+    var streetNames = streetAnchors.map((anchor) => anchor.text);
 
     // Filter the anchors using a function that determines if "de" is in the name
-    const bestStreetNames = streetNames.filter((anchor) => anchor.indexOf("de") !== -1);
+    var bestStreetNames = streetNames.filter((anchor) => anchor.indexOf("de") !== -1);
 
     // Return the anchors
     console.table(bestStreetNames);
