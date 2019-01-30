@@ -96,6 +96,13 @@
   </div>
 
 <script>
+  // Need to be able to click on a checkbox, then click another checkbox while holding shift and have it select all checkboxes (inclusive) between them
+  // On keyDown, toggle multi-selecting
+  // When toggling a checkbox ON, add it to the history if we're not multi-selecting
+  // When toggling a checkbox OFF, remove it from the history if we're not multi-selecting
+  // When toggling a checkbox ON, if we're multi-selecting, locate the last checkbox in the history
+  // If history has a "last checked", verify it's still checked
 </script>
+
 </body>
 </html>
