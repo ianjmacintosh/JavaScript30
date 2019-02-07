@@ -9,12 +9,8 @@ players.forEach(function initializePlayer(player) {
 
     let seeking = false;
 
-    const toggleVideoPlayback = (video) => {
-        if (video.paused) {
-            video.play();
-        } else {
-            video.pause();
-        }
+    const toggleVideoPlayback = () => {
+        video.paused ? video.play() : video.pause()
     }
 
     const updateVolume = (volume) => {
