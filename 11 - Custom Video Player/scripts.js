@@ -6,6 +6,7 @@ players.forEach(function initializePlayer(player) {
     const volumeSlider = player.querySelector("input[name=volume]");
     const seeker = player.querySelector(".progress");
     const seekerProgress = seeker.querySelector(".progress__filled");
+    const speedSlider = player.querySelector("input[name=playbackRate]");
 
     let seeking = false;
 
@@ -17,9 +18,8 @@ players.forEach(function initializePlayer(player) {
         video.volume = volume;
     }
 
-    const seekTo = (percentage) => {
-        const newTime = video.duration * percentage;
-        video.currentTime = newTime;
+    const updateSpeed = (speed) => {
+        video.playbackRate = speed;
     }
 
     const updateSeekerBar = () => {
@@ -36,6 +36,7 @@ players.forEach(function initializePlayer(player) {
     video.addEventListener("timeupdate", () => updateSeekerBar(video));
     playButton.addEventListener("click", () => toggleVideoPlayback(video));
     volumeSlider.addEventListener("input", (event) => updateVolume(event.target.value));
+    speedSlider.addEventListener("input", (event) => updateSpeed(event.target.value));
     seeker.addEventListener("mousedown", () => seeking = true);
     seeker.addEventListener("mouseup", (event) => {
         seekTo(event.offsetX / seeker.clientWidth);
