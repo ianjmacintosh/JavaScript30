@@ -42,7 +42,6 @@ players.forEach(function initializePlayer(player) {
     });
     seeker.addEventListener("mousemove", (event) => {
         if (!seeking) { return false; }
-        console.log(`Seek to ${event.offsetX / seeker.clientWidth * 100}%`);
         seekTo(event.offsetX / seeker.clientWidth);
     });
 });
