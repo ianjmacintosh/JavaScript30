@@ -22,19 +22,17 @@ players.forEach(function initializePlayer(player) {
         video.playbackRate = speed;
     }
 
+    const seekTo = (percentage) => video.currentTime = video.duration * percentage
+
     const updateSeekerBar = () => {
-        console.log("It ran" + video.duration);
         seekerProgress.style.flexBasis = `${video.currentTime / video.duration * 100}%`;
     }
 
-    if (video.readyState === 0) {
-        video.addEventListener("load", () => updateSeekerBar);
-    } else {
-        updateSeekerBar();
-    }
-    video.addEventListener("click", () => toggleVideoPlayback(video));
-    video.addEventListener("timeupdate", () => updateSeekerBar(video));
-    playButton.addEventListener("click", () => toggleVideoPlayback(video));
+    updateSeekerBar();
+
+    video.addEventListener("click", toggleVideoPlayback);
+    video.addEventListener("timeupdate", updateSeekerBar);
+    playButton.addEventListener("click", toggleVideoPlayback);
     volumeSlider.addEventListener("input", (event) => updateVolume(event.target.value));
     speedSlider.addEventListener("input", (event) => updateSpeed(event.target.value));
     seeker.addEventListener("mousedown", () => seeking = true);
