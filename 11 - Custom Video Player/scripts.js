@@ -7,7 +7,8 @@ players.forEach(function initializePlayer(player) {
         seeker = player.querySelector(".progress"),
         seekerProgress = seeker.querySelector(".progress__filled"),
         speedSlider = player.querySelector("input[name=playbackRate]");
-        skipButtons = player.querySelectorAll("button[data-skip]");
+        skipButtons = player.querySelectorAll("button[data-skip]"),
+        fullscreenButton = player.querySelector("button[title='Go Fullscreen']");
 
     let seeking = false;
 
@@ -44,6 +45,7 @@ players.forEach(function initializePlayer(player) {
     playButton.addEventListener("click", toggleVideoPlayback);
     volumeSlider.addEventListener("input", (event) => updateVolume(event.target.value));
     speedSlider.addEventListener("input", (event) => updateSpeed(event.target.value));
+    fullscreenButton.addEventListener("click", () => { video.requestFullscreen() });
     seeker.addEventListener("mousedown", () => seeking = true);
     seeker.addEventListener("mouseup", (event) => {
         seekTo(event.offsetX / seeker.clientWidth);
