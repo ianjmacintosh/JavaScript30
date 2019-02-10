@@ -7,6 +7,7 @@ players.forEach(function initializePlayer(player) {
         seeker = player.querySelector(".progress"),
         seekerProgress = seeker.querySelector(".progress__filled"),
         speedSlider = player.querySelector("input[name=playbackRate]");
+        skipButtons = player.querySelectorAll("button[data-skip]");
 
     let seeking = false;
 
@@ -31,8 +32,15 @@ players.forEach(function initializePlayer(player) {
 
     updateSeekerBar();
 
+    // Bind event listeners
     video.addEventListener("click", toggleVideoPlayback);
     video.addEventListener("timeupdate", updateSeekerBar);
+    skipButtons.forEach(function addEventListener(button) {
+            button.addEventListener("click", (event) => {
+                video.currentTime += parseInt(event.target.dataset.skip, 10);
+            })
+        }
+    );
     playButton.addEventListener("click", toggleVideoPlayback);
     volumeSlider.addEventListener("input", (event) => updateVolume(event.target.value));
     speedSlider.addEventListener("input", (event) => updateSpeed(event.target.value));
