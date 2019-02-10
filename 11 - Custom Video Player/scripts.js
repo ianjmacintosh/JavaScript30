@@ -1,12 +1,12 @@
 const players = document.querySelectorAll(".player");
 
 players.forEach(function initializePlayer(player) {
-    const video = player.querySelector("video.viewer");
-    const playButton = player.querySelector("button[title='Toggle Play']");
-    const volumeSlider = player.querySelector("input[name=volume]");
-    const seeker = player.querySelector(".progress");
-    const seekerProgress = seeker.querySelector(".progress__filled");
-    const speedSlider = player.querySelector("input[name=playbackRate]");
+    const video = player.querySelector("video.viewer"),
+        playButton = player.querySelector("button[title='Toggle Play']"),
+        volumeSlider = player.querySelector("input[name=volume]"),
+        seeker = player.querySelector(".progress"),
+        seekerProgress = seeker.querySelector(".progress__filled"),
+        speedSlider = player.querySelector("input[name=playbackRate]");
 
     let seeking = false;
 
