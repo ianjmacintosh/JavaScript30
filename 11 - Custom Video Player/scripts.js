@@ -11,7 +11,8 @@ players.forEach(function initializePlayer(player) {
     let seeking = false;
 
     const toggleVideoPlayback = () => {
-        video.paused ? video.play() : video.pause()
+        video.paused ? video.play() : video.pause();
+        playButton.textContent = video.paused ? "▶️" : "⏸";
     }
 
     const updateVolume = (volume) => {
