@@ -22,16 +22,16 @@
   let step = 0;
 
   document.addEventListener("keyup", (event) => {
-    console.log(step);
-    console.log(`Key pressed: ${event.key.toLowerCase()}`);
-
+    // If the visitor messed up the sequence, reset progress and bail
     if (event.key.toLowerCase() !== keySequence[step].toLowerCase()) {
       step = 0;
       return;
     }
 
+    // Otherwise, increment the step counter
     step++;
 
+    // If they get to the end, go AQUAMAN ♒️👨🏻
     if (step === keySequence.length) {
       step = 0;
       document.body.style.backgroundColor = "aqua";
