@@ -3,10 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <title>Key Detection</title>
-  <script type="text/javascript" src="http://www.cornify.com/js/cornify.js"></script>
 </head>
 <body>
 <script>
+  const keySequence = [
+      "arrowup",
+      "arrowup",
+      "arrowdown",
+      "arrowdown",
+      "arrowleft",
+      "arrowright",
+      "arrowleft",
+      "arrowright",
+      "b",
+      "a",
+      "meta"
+    ];
+  let step = 0;
+
+  document.addEventListener("keyup", (event) => {
+    console.log(step);
+    console.log(`Key pressed: ${event.key.toLowerCase()}`);
+
+    if (event.key.toLowerCase() !== keySequence[step].toLowerCase()) {
+      step = 0;
+      return;
+    }
+
+    step++;
+
+    if (step === keySequence.length) {
+      step = 0;
+      document.body.style.backgroundColor = "aqua";
+    }
+  });
 </script>
 </body>
 </html>
