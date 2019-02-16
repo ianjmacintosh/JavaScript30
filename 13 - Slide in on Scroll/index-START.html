@@ -60,17 +60,24 @@
 
     const scrollImages = document.querySelectorAll(".slide-in");
 
-    function updateSlides(event) {
-      console.count(event);
+    function updateSliderImages(event) {
+      scrollImages.forEach((image) => {
+        const scrollInAt = image.offsetTop + (image.clientHeight / 2);
+        const scrollOutAt = image.offsetTop + image.clientHeight + window.innerHeight;
+        const bottomOfWindow = window.scrollY + window.innerHeight;
 
-      let imagesToShow = Array.from(scrollImages).filter((image) => {
-        return window.scrollY + window.innerHeight >= image.offsetTop + image.clientHeight;
+        const isHalfShown = bottomOfWindow >= scrollInAt;
+        const isAboveViewport = bottomOfWindow >= scrollOutAt;
+
+        if (isHalfShown && !isAboveViewport) {
+          image.classList.add("active");
+        } else {
+          image.classList.remove("active");
+        }
       });
-
-      imagesToShow.forEach(image => image.classList.add("active"));
     }
 
-    window.addEventListener("scroll", debounce(updateSlides));
+    window.addEventListener("scroll", debounce(updateSliderImages));
 
   </script>
 
