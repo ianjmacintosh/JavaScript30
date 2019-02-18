@@ -30,6 +30,19 @@
   const itemsList = document.querySelector('.plates');
   const items = [];
 
+  function addItem(event) {
+    event.preventDefault();
+
+    const item = {
+      text: this.item.value,
+      taco: false
+    }
+
+    console.table(item);
+  }
+
+  addItems.addEventListener("submit", addItem);
+
 </script>
 
 
