@@ -50,7 +50,7 @@
   const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
 
   function alphabetizeWithoutArticles(firstString, secondString) {
-    return removeArticle(firstString).split("")[0].toUpperCase() > removeArticle(secondString).split("")[0].toUpperCase() ? 1 : -1;
+    return removeArticle(firstString) > removeArticle(secondString) ? 1 : -1;
   }
 
   function removeArticle(string) {
