@@ -26,12 +26,12 @@
       padding: 0;
       box-shadow: 0 0 0 20px rgba(0, 0, 0, 0.05);
     }
-    
+
     #bands li {
       border-bottom: 1px solid #efefef;
       padding: 20px;
     }
-    
+
     #bands li:last-child {
       border-bottom: 0;
     }
@@ -46,9 +46,32 @@
   <ul id="bands"></ul>
 
 <script>
-const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
+  const bandsListElement = document.getElementById("bands");
+  const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
 
+  function alphabetizeWithoutArticles(firstString, secondString) {
+    return removeArticle(firstString).split("")[0].toUpperCase() > removeArticle(secondString).split("")[0].toUpperCase() ? 1 : -1;
+  }
 
+  function removeArticle(string) {
+    const articles = [ "The", "A", "An" ];
+
+    let output = string;
+    let stringAsArray = string.split(" ");
+    const isFirstWordAnArticle = articles.some(article => stringAsArray[0].toUpperCase() === article.toUpperCase());
+
+    if (isFirstWordAnArticle) {
+      stringAsArray.shift();
+    }
+
+    output = stringAsArray.join(" ");
+
+    return output;
+  }
+
+  const sortedBands = bands.sort(alphabetizeWithoutArticles);
+
+  bandsListElement.innerHTML = sortedBands.map(band => `<li>${band}</li>`).join("");
 </script>
 
 </body>
