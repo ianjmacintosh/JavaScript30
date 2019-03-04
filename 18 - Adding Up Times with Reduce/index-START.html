@@ -182,6 +182,33 @@
     </li>
   </ul>
 <script>
+  const videoElements = document.querySelectorAll(".videos li");
+
+  let timeInSeconds = Array.from(videoElements)
+    .map(video => video.dataset.time)
+    .map(time => {
+      let [ minutes, seconds ] = time.split(":");
+
+      return minutes * 60 + seconds * 1; // Multiplying by 1 to coerce type to Number
+    })
+    .reduce((total, current) => total + current);
+
+
+  function getFormattedTime(time) {
+    let secondsLeft = time;
+
+    let hours = Math.floor(secondsLeft / 3600);
+    secondsLeft = secondsLeft % 3600;
+
+    let minutes = Math.floor(secondsLeft / 60);
+    secondsLeft = secondsLeft % 60;
+
+    let seconds = Math.floor(secondsLeft);
+
+    return `${hours}:${minutes}:${seconds}`;
+  }
+
+  console.log(`Total time: ${getFormattedTime(timeInSeconds)}`);
 </script>
 </body>
 </html>
