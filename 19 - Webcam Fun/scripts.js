@@ -11,6 +11,10 @@ function getVideo() {
     })
         .then((localMediaStream) => {
             console.log(localMediaStream);
-            video.src = window.URL.createObjectURL(localMediaStream);
+            video.srcObject = localMediaStream;
+            video.play();
+        })
+        .catch(err => {
+            console.error(`Oh no`, err);
         });
 }
