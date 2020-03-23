@@ -59,12 +59,17 @@
 
 <script>
 document.addEventListener("keydown", (keyboardEvent) => {
-  let keysWeCareAbout = [
-    "a", "s", "d", "f", "g", "h", "j", "k", "l"
-  ];
+  let audio = document.querySelector(`audio[data-key='${keyboardEvent.keyCode}'`);
+  let keyElement = document.querySelector(`.key[data-key='${keyboardEvent.keyCode}'`);
 
-  if (keysWeCareAbout.indexOf(keyboardEvent.key) === -1) { return; }
-  document.querySelector(`audio[data-key='${keyboardEvent.keyCode}']`).play();
+  if (!audio) return;
+
+  keyElement.classList.add("playing");
+  keyElement.addEventListener("transitionend", () => {
+    keyElement.classList.remove("playing");
+  })
+  audio.currentTime = 0;
+  audio.play();
 })
 </script>
 
