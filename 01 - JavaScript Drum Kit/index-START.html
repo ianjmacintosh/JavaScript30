@@ -58,7 +58,14 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 
 <script>
+document.addEventListener("keydown", (keyboardEvent) => {
+  let keysWeCareAbout = [
+    "a", "s", "d", "f", "g", "h", "j", "k", "l"
+  ];
 
+  if (keysWeCareAbout.indexOf(keyboardEvent.key) === -1) { return; }
+  document.querySelector(`audio[data-key='${keyboardEvent.keyCode}']`).play();
+})
 </script>
 
 
