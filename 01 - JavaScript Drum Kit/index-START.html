@@ -65,12 +65,17 @@ document.addEventListener("keydown", (keyboardEvent) => {
   if (!audio) return;
 
   keyElement.classList.add("playing");
-  keyElement.addEventListener("transitionend", () => {
-    keyElement.classList.remove("playing");
-  })
   audio.currentTime = 0;
   audio.play();
-})
+});
+
+let keys = document.querySelectorAll(".key");
+
+keys.forEach((key) => {
+  key.addEventListener("transitionend", () => {
+    key.classList.remove("playing");
+  })
+});
 </script>
 
 
