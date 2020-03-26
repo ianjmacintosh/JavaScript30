@@ -51,6 +51,13 @@
 
     // Array.prototype.sort()
     // 3. Sort the inventors by birthdate, oldest to youngest
+    function getAgeDifference(personA, personB) {
+      return personA.year - personB.year;
+    }
+
+    const inventorsSortedOldestToYoungest = inventors.sort(getAgeDifference);
+
+    console.table(inventorsSortedOldestToYoungest);
 
     // Array.prototype.reduce()
     // 4. How many years did all the inventors live all together?
