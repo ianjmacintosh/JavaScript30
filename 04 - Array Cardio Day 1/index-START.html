@@ -100,6 +100,21 @@
     // Sum up the instances of each of these
     const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car', 'truck' ];
 
+    function reportOccurancesInData(haystack, needle) {
+      function getOccurances(accumulator, string) {
+        if (string === needle) { accumulator += 1 }
+        return accumulator;
+      }
+
+      console.log(`Instances of ${needle}: ${haystack.reduce(getOccurances, 0)}`);
+    }
+
+    reportOccurancesInData(data, "car");
+    reportOccurancesInData(data, "truck");
+    reportOccurancesInData(data, "bike");
+    reportOccurancesInData(data, "walk");
+    reportOccurancesInData(data, "van");
+
   </script>
 </body>
 </html>
