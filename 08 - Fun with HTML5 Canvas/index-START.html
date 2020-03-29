@@ -7,6 +7,60 @@
 <body>
 <canvas id="draw" width="800" height="800"></canvas>
 <script>
+  const canvas = document.querySelector("canvas");
+  const ctx = canvas.getContext("2d");
+
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+
+  ctx.strokeStyle = "#bada55";
+  ctx.lineCap = "round";
+  ctx.lineJoin = "round";
+  ctx.lineWidth = 100;
+
+  let isDrawing = false;
+  let lastX;
+  let lastY;
+  let hue = 0;
+  let lineWidth = 10;
+  let direction = 1;
+
+  function startDrawing(e) {
+    isDrawing = true;
+    lastX = e.offsetX;
+    lastY = e.offsetY;
+  }
+
+  function draw(e) {
+    if (!isDrawing) {
+      return;
+    } else {
+      let newX = e.offsetX;
+      let newY = e.offsetY;
+      ctx.strokeStyle = `hsl(${hue}, 100%, 50%)`;
+      ctx.lineWidth = lineWidth;
+      console.log(lineWidth);
+
+      ctx.beginPath();
+      ctx.moveTo(lastX, lastY);
+      ctx.lineTo(newX, newY);
+      ctx.stroke();
+
+      lastX = newX;
+      lastY = newY;
+      hue = (hue >= 360) ? 0 : hue += 1; // Increment up to 360 then reset
+
+      if (lineWidth > 30 || lineWidth < 10) { // If we're getting too big or small...
+        direction *= -1; // Flip the direction the line is resizing!
+      }
+      lineWidth = lineWidth + direction; // Grow (or shrink) the line
+    }
+  }
+
+  canvas.addEventListener("mousedown", startDrawing);
+  canvas.addEventListener("mouseup", () => { isDrawing = false });
+  canvas.addEventListener("mouseout", () => { isDrawing = false });
+  canvas.addEventListener("mousemove", draw);
 </script>
 
 <style>
