@@ -10,6 +10,9 @@ const buttons = {
 const playbackRate = player.querySelector("input[name='playbackRate']");
 const volume = player.querySelector("input[name='volume']");
 
+console.assert(player && video && progressBar && buttons && playbackRate && volume,
+    "One of your elements could not be found");
+
 // Define our functionality
 
 // Bind our event listeners
