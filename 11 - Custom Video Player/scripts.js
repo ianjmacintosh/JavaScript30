@@ -17,6 +17,10 @@ console.assert(player && video && progressBar && buttons && playbackRate && volu
 
 // # Inventory of functionality:
 // * Volume control adjusts video volume
+function setVolume() {
+    console.log(`Volume now set to ${volume.value}`);
+    video.volume = volume.value;
+}
 // * Play button plays and pauses
 // * Progress bar updates while video plays
 // * User can click or drag seeker to navigate video
@@ -24,3 +28,4 @@ console.assert(player && video && progressBar && buttons && playbackRate && volu
 // * User can adjust playback rate with control
 
 // Bind our event listeners
+volume.addEventListener("change", setVolume);
