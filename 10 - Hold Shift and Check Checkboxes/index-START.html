@@ -96,6 +96,34 @@
   </div>
 
 <script>
+  const checkboxesArray = Array.from(document.querySelectorAll(".inbox input[type='checkbox']"));
+
+  let lastCheckboxChecked;
+  let isUserSelectingMultiple = false;
+
+  function handleCheckboxChange() {
+    let oldCheckboxNumber = checkboxesArray.indexOf(lastCheckboxChecked);
+    let newCheckboxNumber = checkboxesArray.indexOf(this);
+
+    if (isUserSelectingMultiple) {
+      let checkboxesToCheck = checkboxesArray.slice( // Get all the checkboxes the user wants to check
+        Math.min(oldCheckboxNumber, newCheckboxNumber), // Starting from the first one...
+        Math.max(oldCheckboxNumber, newCheckboxNumber) + 1); // ...and ending with the last one
+
+      checkboxesToCheck.forEach((checkbox) => {
+        checkbox.checked = true;
+      })
+    }
+
+    lastCheckboxChecked = this;
+  }
+
+  window.addEventListener("keydown", (e) => { if (e.key === "Shift") isUserSelectingMultiple = true; });
+  window.addEventListener("keyup", (e) => { if (e.key === "Shift") isUserSelectingMultiple = false; });
+
+  checkboxesArray.forEach((checkbox) => {
+    checkbox.addEventListener("change", handleCheckboxChange);
+  });
 </script>
 </body>
 </html>
