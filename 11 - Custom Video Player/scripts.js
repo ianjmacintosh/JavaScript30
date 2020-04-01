@@ -40,8 +40,7 @@ function updateSeeker() {
 }
 
 // * User can click or drag seeker to navigate video
-function seekTo(event) {
-    let newTime = (event.offsetX / seeker.clientWidth) * video.duration;
+function seekTo(newTime) {
     console.log(`Seeking to ${newTime}`);
     video.currentTime = newTime;
 }
@@ -57,6 +56,8 @@ buttons.play.addEventListener("click", togglePlay);
 
 video.addEventListener("timeupdate", updateSeeker);
 
-seeker.addEventListener("mouseup", seekTo);
+seeker.addEventListener("mouseup", (event) => {
+    seekTo((event.offsetX / seeker.clientWidth) * video.duration);
+});
 
 updateSeeker(); // Update the seeker to show we're at 0% status
