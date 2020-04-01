@@ -15,4 +15,12 @@ console.assert(player && video && progressBar && buttons && playbackRate && volu
 
 // Define our functionality
 
+// # Inventory of functionality:
+// * Volume control adjusts video volume
+// * Play button plays and pauses
+// * Progress bar updates while video plays
+// * User can click or drag seeker to navigate video
+// * User can skip ahead or backward with skip buttons
+// * User can adjust playback rate with control
+
 // Bind our event listeners
