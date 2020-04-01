@@ -1,7 +1,8 @@
 // Get our elements
 const player = document.querySelector(".player");
 const video = player.querySelector("video");
-const progressBar = player.querySelector(".progress");
+const seeker = player.querySelector(".progress");
+const seekerFiller = seeker.querySelector(".progress__filled");
 const buttons = {
     play: player.querySelector("button[title='Toggle Play']"),
     skipBack: player.querySelector("button[data-skip='-10']"),
@@ -10,7 +11,7 @@ const buttons = {
 const playbackRate = player.querySelector("input[name='playbackRate']");
 const volume = player.querySelector("input[name='volume']");
 
-console.assert(player && video && progressBar && buttons && playbackRate && volume,
+console.assert(player && video && seeker && seekerFiller && buttons && playbackRate && volume,
     "One of your elements could not be found");
 
 // Define our functionality
