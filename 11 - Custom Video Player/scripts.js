@@ -35,6 +35,9 @@ function togglePlay() {
     }
 }
 // * Progress bar updates while video plays
+function updateSeeker() {
+    seekerFiller.style.flexBasis = `${(video.currentTime / video.duration) * 100}%`;
+}
 // * User can click or drag seeker to navigate video
 // * User can skip ahead or backward with skip buttons
 // * User can adjust playback rate with control
@@ -44,3 +47,5 @@ volume.addEventListener("change", setVolume);
 
 video.addEventListener("click", togglePlay);
 buttons.play.addEventListener("click", togglePlay);
+
+video.addEventListener("timeupdate", updateSeeker);
