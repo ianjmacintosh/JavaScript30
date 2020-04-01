@@ -38,7 +38,14 @@ function togglePlay() {
 function updateSeeker() {
     seekerFiller.style.flexBasis = `${(video.currentTime / video.duration) * 100}%`;
 }
+
 // * User can click or drag seeker to navigate video
+function seekTo(event) {
+    let newTime = (event.offsetX / seeker.clientWidth) * video.duration;
+    console.log(newTime);
+    video.currentTime = newTime;
+}
+
 // * User can skip ahead or backward with skip buttons
 // * User can adjust playback rate with control
 
@@ -49,3 +56,5 @@ video.addEventListener("click", togglePlay);
 buttons.play.addEventListener("click", togglePlay);
 
 video.addEventListener("timeupdate", updateSeeker);
+
+seeker.addEventListener("mouseup", seekTo);
