@@ -21,7 +21,18 @@ function setVolume() {
     console.log(`Volume now set to ${volume.value}`);
     video.volume = volume.value;
 }
+
 // * Play button plays and pauses
+function togglePlay() {
+    if (video.paused) {
+        buttons.play.textContent = "⏸️";
+        video.play();
+    }
+    else {
+        buttons.play.textContent = "▶️";
+        video.pause();
+    }
+}
 // * Progress bar updates while video plays
 // * User can click or drag seeker to navigate video
 // * User can skip ahead or backward with skip buttons
@@ -29,3 +40,6 @@ function setVolume() {
 
 // Bind our event listeners
 volume.addEventListener("change", setVolume);
+
+video.addEventListener("click", togglePlay);
+buttons.play.addEventListener("click", togglePlay);
