@@ -19,7 +19,6 @@ console.assert(player && video && seeker && seekerFiller && buttons && playbackR
 // # Inventory of functionality:
 // * Volume control adjusts video volume
 function setVolume() {
-    console.log(`Volume now set to ${volume.value}`);
     video.volume = volume.value;
 }
 
@@ -41,13 +40,10 @@ function updateSeeker() {
 
 // * User can click or drag seeker to navigate video
 function seekTo(newTime) {
-    console.log(`Seeking to ${newTime}`);
     video.currentTime = newTime;
 }
 
 function handleSeekerActivity(event) {
-    console.log(`Dragging: ${dragging}`);
-    console.log(`Would jump to ${((event.offsetX / seeker.clientWidth) * video.duration)}`);
     if (dragging) {
         seekTo((event.offsetX / seeker.clientWidth) * video.duration);
     }
