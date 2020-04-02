@@ -45,6 +45,14 @@ function seekTo(newTime) {
     video.currentTime = newTime;
 }
 
+function handleSeekerActivity(event) {
+    console.log(`Dragging: ${dragging}`);
+    console.log(`Would jump to ${((event.offsetX / seeker.clientWidth) * video.duration)}`);
+    if (dragging) {
+        seekTo((event.offsetX / seeker.clientWidth) * video.duration);
+    }
+}
+
 // * User can skip ahead or backward with skip buttons
 function skip() {
     let newTime = video.currentTime + parseInt(this.dataset.skip, 10);
@@ -64,9 +72,9 @@ buttons.play.addEventListener("click", togglePlay);
 
 video.addEventListener("timeupdate", updateSeeker);
 
-seeker.addEventListener("mouseup", (event) => {
-    seekTo((event.offsetX / seeker.clientWidth) * video.duration);
-});
+seeker.addEventListener("mousemove", handleSeekerActivity);
+seeker.addEventListener("mousedown", () => dragging = true);
+seeker.addEventListener("mouseup", () => dragging = false);
 
 buttons.skipBack.addEventListener("click", skip);
 buttons.skipForward.addEventListener("click", skip);
