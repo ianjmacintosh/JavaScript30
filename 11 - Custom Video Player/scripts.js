@@ -45,6 +45,11 @@ function seekTo(newTime) {
     video.currentTime = newTime;
 }
 
+function skip() {
+    let newTime = video.currentTime + parseInt(this.dataset.skip, 10);
+    seekTo(newTime);
+}
+
 // * User can skip ahead or backward with skip buttons
 // * User can adjust playback rate with control
 
@@ -59,5 +64,8 @@ video.addEventListener("timeupdate", updateSeeker);
 seeker.addEventListener("mouseup", (event) => {
     seekTo((event.offsetX / seeker.clientWidth) * video.duration);
 });
+
+buttons.skipBack.addEventListener("click", skip);
+buttons.skipForward.addEventListener("click", skip);
 
 updateSeeker(); // Update the seeker to show we're at 0% status
