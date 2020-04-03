@@ -7,6 +7,22 @@
 </head>
 <body>
 <script>
+  keySequence = [
+    "h", "e", "l", "l", "o"
+  ];
+  let keyboardStep = 0;
+  function handleKeypress(keyboardEvent) {
+    if (keyboardEvent.key === keySequence[keyboardStep]) {
+      keyboardStep += 1;
+      console.log(`Correct key (${keyboardEvent.key}), now on step ${keyboardStep}`)
+      if (keyboardStep >= keySequence.length) {
+        console.log("Cheat code entered");
+      }
+    } else {
+      keyboardStep = 0;
+    }
+  }
+  window.addEventListener("keyup", handleKeypress);
 </script>
 </body>
 </html>
