@@ -87,18 +87,20 @@
       return newScrollPoints;
     }
 
+    function checkToSlideElements(event) {
+      scrollPoints.filter((scrollPoint, index) => {
+        if (window.scrollY + window.innerHeight >= scrollPoint) {
+          slideIn(elementsToSlideIn[index]);
+        }
+      });
+    }
+
     // Find scroll point for all images
     window.addEventListener("load", () => {
       scrollPoints = getScrollPoints(elementsToSlideIn);
     });
 
-    window.addEventListener("scroll", (event) => {
-      scrollPoints.filter((scrollPoint, index) => {
-        if (window.scrollY + window.innerHeight >= scrollPoint) {
-          slideIn(elementsToSlideIn[index]);
-        }
-      })
-    });
+    window.addEventListener("scroll", debounce(checkToSlideElements));
   </script>
 
   <style>
