@@ -7,16 +7,27 @@
 </head>
 <body>
 <script>
-  keySequence = [
-    "h", "e", "l", "l", "o"
+  const keySequence = [
+    "ArrowUp",
+    "ArrowDown",
+    "ArrowUp",
+    "ArrowDown",
+    "ArrowLeft",
+    "ArrowRight",
+    "ArrowLeft",
+    "ArrowRight",
+    "B",
+    "A",
+    "Enter"
   ];
+
   let keyboardStep = 0;
   function handleKeypress(keyboardEvent) {
-    if (keyboardEvent.key === keySequence[keyboardStep]) {
+    if (keyboardEvent.key.toLowerCase() === keySequence[keyboardStep].toLowerCase()) {
       keyboardStep += 1;
       console.log(`Correct key (${keyboardEvent.key}), now on step ${keyboardStep}`)
       if (keyboardStep >= keySequence.length) {
-        console.log("Cheat code entered");
+        cornify_add();
       }
     } else {
       keyboardStep = 0;
