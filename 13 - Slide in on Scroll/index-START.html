@@ -73,10 +73,12 @@
       let newScrollPoints = [];
       images.forEach((image) => {
         // Get middle of image
-        // Measure distance between top of page and top of image
-        // Add middle of image to that last figure -- that's the number
         let middleOfImage = image.clientHeight / 2;
+
+        // Measure distance between top of page and top of image
         let topOfImage = image.offsetTop;
+
+        // Add middle of image to that last figure -- that's the number
         let scrollPoint = middleOfImage + topOfImage;
 
         newScrollPoints.push(scrollPoint);
