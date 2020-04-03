@@ -58,6 +58,45 @@
       };
     }
 
+    const elementsToSlideIn = document.querySelectorAll(".slide-in");
+    let scrollPoints = [];
+
+    function slideIn(element) {
+      element.classList.add("active");
+    }
+
+    function slideOut(element) {
+      element.classList.remove("active");
+    }
+
+    function getScrollPoints(images) {
+      let newScrollPoints = [];
+      images.forEach((image) => {
+        // Get middle of image
+        // Measure distance between top of page and top of image
+        // Add middle of image to that last figure -- that's the number
+        let middleOfImage = image.clientHeight / 2;
+        let topOfImage = image.offsetTop;
+        let scrollPoint = middleOfImage + topOfImage;
+
+        newScrollPoints.push(scrollPoint);
+      });
+
+      return newScrollPoints;
+    }
+
+    // Find scroll point for all images
+    window.addEventListener("load", () => {
+      scrollPoints = getScrollPoints(elementsToSlideIn);
+    });
+
+    window.addEventListener("scroll", (event) => {
+      scrollPoints.filter((scrollPoint, index) => {
+        if (window.scrollY + window.innerHeight >= scrollPoint) {
+          slideIn(elementsToSlideIn[index]);
+        }
+      })
+    });
   </script>
 
   <style>
@@ -68,11 +107,11 @@
       font-size: 20px;
       font-weight: 200;
     }
-    
+
     body {
       margin: 0;
     }
-    
+
     *, *:before, *:after {
       box-sizing: inherit;
     }
@@ -107,7 +146,7 @@
     .align-left.slide-in {
       transform: translateX(-30%) scale(0.95);
     }
-    
+
     .align-right.slide-in {
       transform: translateX(30%) scale(0.95);
     }
