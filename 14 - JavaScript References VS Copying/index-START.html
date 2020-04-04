@@ -8,17 +8,38 @@
 
   <script>
     // start with strings, numbers and booleans
+    let specialNumber = 1;
+    let otherSpecialNumber = specialNumber;
+    otherSpecialNumber = 2;
+    console.log(`Original number: ${specialNumber}`);
+    console.log(`Copy of number: ${otherSpecialNumber}`);
+
+    let specialString = "Hello";
+    let otherSpecialString = specialString;
+    otherSpecialString = "World";
+    console.log(`Original string: ${specialString}`);
+    console.log(`Copy of string: ${otherSpecialString}`);
+
+    let specialBoolean = true;
+    let otherSpecialBoolean = specialBoolean;
+    otherSpecialBoolean = false;
+    console.log(`Original boolean: ${specialBoolean}`);
+    console.log(`Copy of boolean: ${otherSpecialBoolean}`);
 
     // Let's say we have an array
-    const players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
+    let players = ['Wes', 'Sarah', 'Ryan', 'Poppy'];
 
     // and we want to make a copy of it.
 
     // You might think we can just do something like this:
+    let team = players;
 
     // however what happens when we update that array?
+    team[3] = "Doug";
 
     // now here is the problem!
+    console.log(`Original array: ${players}`);
+    console.log(`Copy of array: ${team}`);
 
     // oh no - we have edited the original array too!
 
@@ -27,28 +48,56 @@
     // So, how do we fix this? We take a copy instead!
 
     // one way
+    let teamSlice = players.slice();
 
     // or create a new array and concat the old one in
+    let teamConcat = [].concat(players);
 
     // or use the new ES6 Spread
+    let teamEs6Spread = [...players];
 
     // now when we update it, the original one isn't changed
+    teamSlice[3] = "Bobby";
+    teamConcat[3] = "Garfield";
+    teamEs6Spread[3] = "Nimoy";
+
+    console.log(`Original array: ${players}`);
+    console.log(`New copy of array (made with slice()): ${teamSlice}`);
+    console.log(`New copy of array (made with concat()): ${teamConcat}`);
+    console.log(`New copy of array (made with ... operator): ${teamEs6Spread}`);
 
     // The same thing goes for objects, let's say we have a person object
 
     // with Objects
-    const person = {
+    let person = {
       name: 'Wes Bos',
       age: 80
     };
 
     // and think we make a copy:
+    let myMan = person;
+    myMan.name = "Wes-dogg";
 
     // how do we take a copy instead?
+    let tutor = Object.assign({}, person);
+    tutor.name = "Wesley Bosley";
 
     // We will hopefully soon see the object ...spread
+    let futureMan = {...person};
+    futureMan.name = "Wez Boz";
+
+    console.log(`Original object: %o`, person);
+    console.log(`New copy of object (made stupidly): %o`, myMan);
+    console.log(`New copy of object (made with assign()): %o`, tutor);
+    console.log(`New copy of object (made with {...}): %o`, futureMan);
 
     // Things to note - this is only 1 level deep - both for Arrays and Objects. lodash has a cloneDeep method, but you should think twice before using it.
+    console.log(`
+      Extra credit! The object spread operator was introduced in ES2018 and enjoys
+      browser support across the board today... but according to MDN, it is still
+      "experimental." I take this to mean that it could change at any moment, and
+      that the proposal hasn't been finalized or approved.
+    `);
 
   </script>
 
