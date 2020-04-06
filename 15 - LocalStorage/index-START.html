@@ -30,6 +30,31 @@
   const itemsList = document.querySelector('.plates');
   const items = [];
 
+  function addItem(event) {
+    event.preventDefault();
+
+    items.push({
+      "name": event.currentTarget[0].value,
+      "done": false
+    });
+    itemsList.innerHTML = getUpdatedPlatesList();
+    event.currentTarget[0].value = "";
+  }
+
+  function getUpdatedPlatesList() {
+    let newMarkup = items.map(({ name, done }, index) => {
+      return `
+      <li>
+        <input type="checkbox" name="${index}" ${done ? "checked" : ""}/>
+        <label for="${index}">${name}</label>
+      </li>`;
+    }).join("");
+
+    return newMarkup;
+  }
+
+  addItems.addEventListener("submit", addItem);
+
 </script>
 
 
