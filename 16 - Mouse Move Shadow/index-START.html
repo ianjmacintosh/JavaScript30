@@ -29,12 +29,41 @@
   }
 
   h1 {
-    text-shadow: 10px 10px 0 rgba(0,0,0,1);
+    --x1: 10px;
+    --y1: 10px;
+
+    --x2: -10px;
+    --y2: -10px;
+
+    text-shadow:
+      var(--x1) var(--y1) 0 cyan,
+      var(--x2) var(--y1) 0 magenta,
+      var(--x1) var(--y2) 0 yellow,
+      var(--x2) var(--y2) 0 greenyellow;
     font-size: 100px;
   }
   </style>
 
 <script>
+  const heading = document.querySelector("h1");
+  const middleX = heading.offsetLeft + heading.clientWidth / 2;
+  const middleY = heading.offsetTop + heading.clientHeight / 2;
+
+  function updateShadows(newX, newY, element = heading) {
+    element.style.setProperty("--x1", `${newX}px`);
+    element.style.setProperty("--x2", `${newX * -1}px`);
+    element.style.setProperty("--y1", `${newY}px`);
+    element.style.setProperty("--y2", `${newY * -1}px`);
+  }
+
+  function getDistance(event) {
+    let x = (event.clientX - middleX) * 0.25;
+    let y = (event.clientY - middleY) * 0.25;
+
+    updateShadows(x, y, document.querySelector("h1"));
+  }
+
+  window.addEventListener("mousemove", getDistance);
 </script>
 </body>
 </html>
