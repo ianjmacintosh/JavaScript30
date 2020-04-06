@@ -28,7 +28,7 @@
 <script>
   const addItems = document.querySelector('.add-items');
   const itemsList = document.querySelector('.plates');
-  const items = [];
+  const items = JSON.parse(localStorage.getItem("items")) || [];
 
   function addItem(event) {
     event.preventDefault();
@@ -37,21 +37,37 @@
       "name": event.currentTarget[0].value,
       "done": false
     });
-    itemsList.innerHTML = getUpdatedPlatesList();
+    itemsList.innerHTML = getUpdatedPlatesList(items);
+    localStorage.setItem("items", JSON.stringify(items));
     event.currentTarget[0].value = "";
   }
 
-  function getUpdatedPlatesList() {
+  function getUpdatedPlatesList(items = []) {
+    if (items.length < 1) { return; }
     let newMarkup = items.map(({ name, done }, index) => {
       return `
       <li>
-        <input type="checkbox" name="${index}" ${done ? "checked" : ""}/>
-        <label for="${index}">${name}</label>
+        <input type="checkbox" data-index="${index}" id="item${index}" ${done ? "checked" : ""}/>
+        <label for="item${index}">${name}</label>
       </li>`;
     }).join("");
 
     return newMarkup;
   }
+
+  function markAsDone(item, checked) {
+    items[item].done = checked;
+  }
+
+  function toggleDone(e) {
+    if (!e.target.matches("input")) return;
+    items[e.target.dataset.index].done = e.target.checked;
+    localStorage.setItem("items", JSON.stringify(items));
+  }
+
+  itemsList.innerHTML = getUpdatedPlatesList(items);
+
+  itemsList.addEventListener("click", toggleDone);
 
   addItems.addEventListener("submit", addItem);
 
