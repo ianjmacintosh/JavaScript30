@@ -47,19 +47,30 @@
 
 <script>
 const bands = ['The Plot in You', 'The Devil Wears Prada', 'Pierce the Veil', 'Norma Jean', 'The Bled', 'Say Anything', 'The Midway State', 'We Came as Romans', 'Counterparts', 'Oh, Sleeper', 'A Skylit Drive', 'Anywhere But Here', 'An Old Dog'];
+const bandsList = document.querySelector("#bands");
 
-function sortAlphabetically(bandA, bandB) {
-  let sortDirection = 0;
-  let i = 0;
-  let normalizedBandA = bandA.toUpperCase();
-  let normalizedBandB = bandB.toUpperCase();
-  while (sortDirection === 0) {
-    let sortDirection = normalizedBandA[i] - normalizedBandB[i];
-  }
-
-  return sortDirection;
+function removeArticles(string) {
+  let articlesRegEx = /^(the|a|an)$/gi;
+  return string
+    .split(" ")
+    .filter((word) => !articlesRegEx.test(word))
+    .join(" ");
 }
-console.dir(bands.sort());
+
+function compareWithNoArticles(a, b) {
+  let normalizedA = removeArticles(a);
+  let normalizedB = removeArticles(b);
+
+  return (normalizedA > normalizedB ? 1 : -1);
+}
+
+function getListMarkup(item) {
+  return `<li>${item}</li>`;
+}
+
+let listMarkup = bands.sort(compareWithNoArticles).map(getListMarkup).join("");
+
+bandsList.innerHTML = listMarkup;
 
 </script>
 
