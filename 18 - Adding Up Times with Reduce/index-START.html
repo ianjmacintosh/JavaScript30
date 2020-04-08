@@ -197,17 +197,20 @@
   }
 
   function getTimeInHoursMinutesSeconds(seconds) {
-    let hours = 3600 % seconds;
-    seconds -= hours * 3600;
-    let minutes = 60 % seconds;
-    seconds -= minutes * 60;
+    let secondsLeft = seconds;
 
-    return `${hours}:${minutes}:${seconds}`;
+    let hours = Math.floor(secondsLeft / 3600);
+    secondsLeft = secondsLeft % 3600;
+
+    let minutes = Math.floor(secondsLeft / 60);
+    secondsLeft = secondsLeft % 60;
+
+    return `${hours}:${minutes}:${secondsLeft}`;
   }
 
-  console.log(videoTimes.reduce((accumulator, timeString) => {
+  console.log(getTimeInHoursMinutesSeconds(videoTimes.reduce((accumulator, timeString) => {
     return getSecondsFromString(timeString) + accumulator;
-  }, 0));
+  }, 0)));
 </script>
 </body>
 </html>
