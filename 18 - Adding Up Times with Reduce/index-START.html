@@ -182,6 +182,32 @@
     </li>
   </ul>
 <script>
+  const videos = document.querySelector(".videos");
+  const videoTimes = [...videos.querySelectorAll("[data-time]")].map((videoElement) => videoElement.dataset.time);
+
+  function getSecondsFromString(duration) {
+    let timeArray = duration.split(":").reverse();
+    timeArray = timeArray.map((number) => parseInt(number, 10))
+
+    let hoursInSeconds = timeArray[2] ? timeArray[2] * 60 * 60 : 0;
+    let minutesInSeconds = timeArray[1] ? timeArray[1] * 60 : 0;
+    let seconds = timeArray[0];
+
+    return hoursInSeconds + minutesInSeconds + seconds;
+  }
+
+  function getTimeInHoursMinutesSeconds(seconds) {
+    let hours = 3600 % seconds;
+    seconds -= hours * 3600;
+    let minutes = 60 % seconds;
+    seconds -= minutes * 60;
+
+    return `${hours}:${minutes}:${seconds}`;
+  }
+
+  console.log(videoTimes.reduce((accumulator, timeString) => {
+    return getSecondsFromString(timeString) + accumulator;
+  }, 0));
 </script>
 </body>
 </html>
