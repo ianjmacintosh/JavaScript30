@@ -36,7 +36,7 @@ function paintToCanvas() {
         // Mess with them
         // pixels = rgbSplit(pixels);
         // ctx.globalAlpha = 0.1;
-        pixels = greenScreen(pixels);
+        pixels = bwEffect(pixels);
 
         // Put them
         ctx.putImageData(pixels, 0, 0);
@@ -57,11 +57,11 @@ function takePhoto() {
     strip.insertBefore(link, strip.firstChild);
 }
 
-function redEffect(pixels) {
+function bwEffect(pixels) {
     for (let i = 0; i < pixels.data.length; i += 4) {
-        pixels.data[i] += 100; // Red
-        pixels.data[i + 1] -= 50; // Green
-        pixels.data[i + 2] *= 0.5; // Blue
+        // pixels.data[i] += 100; // Red
+        pixels.data[i + 1] = pixels.data[i]; // Green
+        pixels.data[i + 2] = pixels.data[i]; // Blue
     }
 
     return pixels;
