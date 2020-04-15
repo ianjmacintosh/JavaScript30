@@ -54,7 +54,21 @@
   </div>
 
 <script>
+const nav = document.querySelector("nav");
+let triggerPoint = nav.offsetTop;
 
+function fixNavigation(e) {
+  if (window.scrollY >= triggerPoint) {
+    console.log("Fixing...");
+    nav.classList.add("fixed");
+    document.body.style.marginTop = `${nav.clientHeight}px`;
+  } else {
+    document.body.style.marginTop = 0;
+    nav.classList.remove("fixed");
+  }
+}
+
+window.addEventListener("scroll", fixNavigation);
 </script>
 
 </body>
