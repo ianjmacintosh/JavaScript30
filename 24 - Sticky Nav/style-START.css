@@ -50,7 +50,7 @@ nav {
   z-index: 1;
 }
 
-nav.fixed {
+.fixed-nav nav {
   position: fixed;
   left: 0;
   right: 0;
@@ -75,13 +75,23 @@ li.logo {
   max-width: 0;
   overflow: hidden;
   background: white;
-  transition: all .5s;
+  transition: all 0.5s;
   font-weight: 600;
   font-size: 30px;
 }
 
+.fixed-nav li.logo {
+  max-width: 500px;
+}
+
 li.logo a {
   color: black;
+  transform: scale(0.6);
+}
+
+.fixed-nav li.logo a {
+  transform: scale(1.4);
+  transition: all 0.3s cubic-bezier(.06,1.4,.77,1.17);
 }
 
 nav a {
