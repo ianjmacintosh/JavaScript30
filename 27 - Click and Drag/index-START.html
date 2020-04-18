@@ -43,21 +43,21 @@
     isDragging = true;
     lastXCoord = event.clientX;
     items.classList.add("active");
-    console.log("Starting to draaaag!!");
   }
 
   function stopDragging() {
     isDragging = false;
     items.classList.remove("active");
-    console.log("Not dragging anymore");
   }
 
   function moveCarousel(event) {
     if (!isDragging) { return; }
+    event.preventDefault();
     let newXCoord = event.clientX;
+    let itemsUpdate = lastXCoord - newXCoord;
 
     if (lastXCoord === newXCoord) { return; }
-    console.log(`Dragging ${lastXCoord - newXCoord >= 0 ? "left" : "right"}`)
+    items.scrollLeft += itemsUpdate * 1.50;
 
     lastXCoord = newXCoord;
   }
