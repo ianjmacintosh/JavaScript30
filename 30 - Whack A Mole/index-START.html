@@ -9,6 +9,7 @@
 <body>
 
   <h1>Whack-a-mole! <span class="score">0</span></h1>
+  <h2>Time Left: <span class="time">0:00</span></h2>
   <button onClick="startGame()">Start!</button>
 
   <div class="game">
@@ -36,7 +37,84 @@
   const holes = document.querySelectorAll('.hole');
   const scoreBoard = document.querySelector('.score');
   const moles = document.querySelectorAll('.mole');
+  const time = document.querySelector('.time');
 
+  let moleTimer;
+  let lastHole;
+  let score = 0;
+  let timeLeft = 10;
+  let scoreboardTimer;
+
+  // Range from 200ms to 2000ms
+  function getRandomNumber(min, max) {
+    return Math.round(Math.random() * (max - min) + min);
+  }
+
+  function getRandomHole() {
+    let newHole = holes[getRandomNumber(0, holes.length - 1)];
+
+    if (newHole == lastHole) {
+      console.log("Whoopsies! Can't return %o again!", newHole);
+      return getRandomHole();
+    }
+    lastHole = newHole;
+
+    return newHole;
+  }
+
+  function startGame() {
+    gameActive = true;
+    score = 0;
+    timeLeft = 10;
+      time.textContent = `0:${timeLeft >= 10 ? timeLeft : "0" + timeLeft}`;
+    scoreBoard.textContent = score;
+    peep();
+
+    setTimeout(() => {
+      gameActive = false;
+    }, 10000);
+
+    scoreboardTimer = setInterval(() => {
+      if (!gameActive) {
+        window.clearInterval(scoreboardTimer);
+      }
+
+      timeLeft -= 1;
+      time.textContent = `0:${timeLeft >= 10 ? timeLeft : "0" + timeLeft}`;
+    }, 1000)
+  }
+
+  function peep() {
+    if (!gameActive) { return; }
+
+    const MIN_TIME = 200;
+    const MAX_TIME = 2000;
+    const time = getRandomNumber(MIN_TIME, MAX_TIME);
+    const hole = getRandomHole();
+    hole.classList.add("up");
+
+    window.clearTimeout(moleTimer);
+    moleTimer = setTimeout(() => {
+      hole.classList.remove("up");
+      if (gameActive) {
+        peep();
+      }
+    }, time)
+  }
+
+  function bonk(e) {
+    if (!e.isTrusted) { return; }
+    if (this.classList.contains("up")) {
+      this.classList.remove("up");
+      score += 1;
+      peep();
+      scoreBoard.textContent = score;
+    }
+  }
+
+  holes.forEach(hole => {
+    hole.addEventListener("click", bonk);
+  });
 </script>
 </body>
 </html>
